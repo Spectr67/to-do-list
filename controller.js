@@ -1,20 +1,20 @@
 function handleAddTask(text) {
   modelTodo.addTask(text)
-  renderUlAddTaskList(modelTodo.todos)
+  renderUlTaskList(modelTodo.todos)
 }
 
 function handleRemoveTask(text) {
   modelTodo.removeTask(text)
-  renderUlAddTaskList(modelTodo.todos)
+  renderUlTaskList(modelTodo.todos)
 }
 
-function handleEditTask(text, isCompleted) {
-  modelTodo.toggleTask(text, isCompleted)
-  renderUlAddTaskList(modelTodo.todos)
+function handleToggleTask(id, isCompleted) {
+  modelTodo.toggleTask(+id, isCompleted)
+  renderUlTaskList(modelTodo.todos)
 }
 
 function onDOMContentLoaded() {
   modelTodo.loadTodos()
-  renderUlAddTaskList(modelTodo.todos)
+  renderUlTaskList(modelTodo.todos)
 }
-let mySuperVariable = 101 
+let mySuperVariable = 101

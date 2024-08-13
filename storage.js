@@ -1,15 +1,8 @@
-function writeToDo(todoList) {
-  console.log("hello")
+function writeTodo(todoList) {
   localStorage.setItem('todoList', JSON.stringify(todoList))
 }
 
-function loadFromStorage() {
+function readTodo() {
   const savedTodos = localStorage.getItem('todoList')
-  if (savedTodos) {
-    return JSON.parse(savedTodos)
-  }
-  return []
+  return JSON.parse(savedTodos ?? '[]')
 }
-
-
-

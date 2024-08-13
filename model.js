@@ -1,11 +1,11 @@
 const modelTodo = {
   todos: [],
+  id: 1,
 
   addTask(text) {
-    if (text === '') {
-      return
-    }
+    if (text === '') return
     const task = {
+      id: this.id++,
       text: text,
       completed: false,
     }
@@ -14,15 +14,13 @@ const modelTodo = {
   },
 
   removeTask(text) {
-    console.log("privet")
-    
     this.todos = this.todos.filter(todo => todo.text !== text)
     this.saveTodo()
   },
 
-  toggleTask(text, isCompleted) {
+  toggleTask(id, isCompleted) {
     for (const todo of this.todos) {
-      if (todo.text === text) {
+      if (todo.id === id) {
         todo.completed = isCompleted
       }
     }
@@ -30,11 +28,10 @@ const modelTodo = {
   },
 
   saveTodo() {
-    writeToDo(this.todos)
-
+    writeTodo(this.todos)
   },
 
   loadTodos() {
-    this.todos = loadFromStorage()
+    this.todos = readTodo()
   },
 }

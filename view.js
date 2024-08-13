@@ -2,7 +2,7 @@ const elAddTaskButton = document.querySelector('#addTaskButton')
 elAddTaskButton.onclick = onClickAddTaskButton
 document.addEventListener('DOMContentLoaded', onDOMContentLoaded)
 
-function generateLi(text, isCompleted = false) {
+function generateLi(text, id, isCompleted = false) {
   const elLi = document.createElement('li')
   const elInput = document.createElement('input')
   const elSpan = document.createElement('span')
@@ -18,7 +18,9 @@ function generateLi(text, isCompleted = false) {
   elLi.appendChild(elInput)
   elLi.appendChild(elSpan)
   elLi.appendChild(elButton)
-  console.log(isCompleted)
+
+  elLi.setAttribute('todo-id', id)
+
   if (isCompleted) {
     elLi.classList.add('completed')
     elInput.setAttribute('checked', '')
@@ -26,16 +28,16 @@ function generateLi(text, isCompleted = false) {
   return elLi
 }
 
-function renderUlAddTaskList(taskList) {
+function renderUlTaskList(taskList) {
   const elUl = document.querySelector('ul')
   elUl.innerHTML = ''
-  taskList.forEach(renderUlAddTask)
+  taskList.forEach(renderUlTask)
 }
 
-function renderUlAddTask(obj) {
+function renderUlTask(obj) {
   const elUl = document.querySelector('ul')
   if (!obj.deleted) {
-    const elLi = generateLi(obj.text, obj.completed)
+    const elLi = generateLi(obj.text, obj.id, obj.completed)
     elUl.appendChild(elLi)
     console.log(obj)
   }
@@ -44,7 +46,7 @@ function renderUlAddTask(obj) {
 function onClickAddTaskButton() {
   const elTaskInput = document.querySelector('#taskInput')
   const text = elTaskInput.value
-  if (text === " "){
+  if (text === ' ') {
     return
   }
   handleAddTask(text)
@@ -60,11 +62,7 @@ function onClickDeleteTaskButton(event) {
 
 function onChangeDoneTaskInput(e) {
   const elLi = e.target.parentElement
-  const elSpan = elLi.querySelector("span")
-
-  
-
-  const text = elSpan.textContent
+  const id = elLi.getAttribute('todo-id')
   const isCompleted = e.target.checked
-  handleEditTask(text, isCompleted)
+  handleToggleTask(id, isCompleted)
 }
