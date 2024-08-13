@@ -51,10 +51,11 @@ function onClickAddTaskButton() {
   elTaskInput.value = ''
 }
 
-function onClickDeleteTaskButton(mySuperEvent) {
-  const elLi = mySuperEvent.target.parentElement
+function onClickDeleteTaskButton(event) {
+  const elLi = event.target.parentElement
+  const taskText = elLi.querySelector('span').textContent
   elLi.remove()
-  handleRemoveTask()
+  handleRemoveTask(taskText)
 }
 
 function onChangeDoneTaskInput(e) {

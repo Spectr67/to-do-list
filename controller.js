@@ -3,9 +3,8 @@ function handleAddTask(text) {
   renderUlAddTaskList(modelTodo.todos)
 }
 
-function handleRemoveTask() {
-  console.log("BYe")
-  modelTodo.removeTask()
+function handleRemoveTask(text) {
+  modelTodo.removeTask(text)
   renderUlAddTaskList(modelTodo.todos)
 }
 
